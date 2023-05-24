@@ -31,9 +31,12 @@ public class UserController {
         ApiResponse response = new ApiResponse(true, "User updated successfully", updatedUser);
         return ResponseEntity.ok(response);
     }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<ApiResponse> deleteUser(@PathVariable Long id) {
-        return ResponseEntity.ok(userService.deleteUser(id));
+   @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteUser(@PathVariable int id){
+        if(userService.deleteUser(id)){
+            return ResponseEntity.status(200).body("deleted");
+        }
+        return ResponseEntity.status(200).body("id dosent");
     }
 
     @PostMapping("/login")
@@ -43,9 +46,11 @@ public class UserController {
 
     @GetMapping("/email")
     public ResponseEntity<ApiResponse> getUserByEmail(@RequestParam String email) {
-        return ResponseEntity.ok(userService.getUserByEmail(email));
+       if(userService.deleteUser(id)){
+            return ResponseEntity.status(200).body("deleted");
+        }
+        return ResponseEntity.status(200).body("id dosent");
     }
-
     @GetMapping("/role")
     public ResponseEntity<ApiResponse> getUsersByRole(@RequestParam String role) {
         return ResponseEntity.ok(userService.getUsersByRole(role));
